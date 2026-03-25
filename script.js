@@ -73,6 +73,17 @@ const scenes = [
 
 function showScene(sceneIndex) {
     const scene = scenes[sceneIndex];
+
+    // Function to reset and apply animation
+    const animate = (element) => {
+        element.classList.remove('fade-in');
+        void element.offsetWidth; // Trigger reflow
+        element.classList.add('fade-in');
+    };
+
+    animate(textElement);
+    animate(choicesElement);
+
     textElement.innerHTML = scene.text;
     choicesElement.innerHTML = '';
     explanationElement.style.display = 'none';
@@ -91,6 +102,7 @@ function showScene(sceneIndex) {
         // For summary scene
         explanationElement.innerHTML = scene.explanation;
         explanationElement.style.display = 'block';
+        animate(explanationElement);
     }
 }
 
